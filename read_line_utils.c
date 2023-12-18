@@ -2,25 +2,36 @@
 
 char    *cut_str(char *s, size_t *len)
 {
-    size_t  i;
     char    *buff;
-
+    size_t  i;
+    size_t  j;
 
     i = 0;
-    while (s[i] != '\n')
+    j = 0;
+    if (!s || !s[i])
+        return (NULL);
+    if (s[j] == '\n')
+        ++j;
+    while (s[i + j] && s[i + j] != '\n')
         ++i;
-    buff = malloc(i + 2);
+    if (s[i] == '\n')
+        ++i;
+    buff = malloc(i + 1);
+    if (!buff)
+        return (NULL);
     i = 0;
-    while (s[i] != '\n')
+    while (s[i + j] && s[i + j] != '\n')
     {
-        buff[i] = s[i];
+        buff[i] = s[i + j];
         ++i;
     }
-    buff[i] = '\n';
-    buff[++i] = '\0';
-    *len = i;
+    if (s[i + j] == '\n')
+        buff[i++] = '\n';
+    buff[i] = '\0';
+    *len = i - 1;
     return (buff);
 }
+
 
 char    *add_nodes_word(t_lst *lst, size_t size)
 {
@@ -28,7 +39,7 @@ char    *add_nodes_word(t_lst *lst, size_t size)
     size_t  i;
 
     i = 0;
-    buff = malloc(size + 1);
+    buff = (char *)malloc(sizeof(char) * size + 1);
     if (!buff)
         return (free(buff), NULL);
     memset(buff, 0, size + 1);
@@ -60,9 +71,9 @@ t_lst	*ft_lstnew(char *content)
 
 	node = (t_lst *)malloc(sizeof(t_lst));
     cont = malloc(BUFFER_SIZE + 1);
-    memset(cont, 0, BUFFER_SIZE + 1);
 	if (!node || !cont)
-		return (NULL);
+		return (free(node), free(cont), NULL);
+    memset(cont, 0, BUFFER_SIZE + 1);
     node->str = cont;
     node->next = NULL;
     if (content)
@@ -115,12 +126,29 @@ void	ft_lstclear(t_lst **lst)
 
 	if (lst == NULL || *lst == NULL)
 		return ;
-	while (*lst != NULL)
+	while ((*lst) != NULL)
 	{
 		next_node = (*lst)->next;
 		free((*lst)->str);
 		free(*lst);
 		*lst = next_node;
 	}
-	// *lst = NULL;
+	 *lst = NULL;
+}
+
+char   *ft_strchr(char *s, char c)
+{
+    size_t  i;
+
+    i = 0;
+    if (s)
+    {
+        while(s[i])
+        {
+            if (s[i] == c)
+                return (&s[i]);
+            i++;
+        }
+    }
+    return (NULL);
 }

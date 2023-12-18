@@ -2,7 +2,7 @@
 #define READ_LINE_H
 
 #ifndef BUFFER_SIZE
-#define BUFFER_SIZE  13
+#define BUFFER_SIZE  1337
 #endif
 
 #include <unistd.h>
@@ -13,15 +13,12 @@
 #include <string.h>
 #include <strings.h>
 
-#ifndef BUFFER_SIZE
-#define BUFFER_SIZE 13
-#endif
-
 typedef struct s_lst {
     char    *str;
     struct s_lst  *next;
 }       t_lst;
 
+char   *ft_strchr(char *s, char c);
 size_t  nodes_words_len(t_lst *lst);
 char    *cut_str(char *s, size_t *len);
 void	ft_lstclear(t_lst **lst);
