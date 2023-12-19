@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_lineutils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 09:10:35 by achakour          #+#    #+#             */
-/*   Updated: 2023/12/19 11:57:12 by achakour         ###   ########.fr       */
+/*   Created: 2023/12/19 11:52:30 by achakour          #+#    #+#             */
+/*   Updated: 2023/12/19 11:53:03 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void    *ft_memset(void *s, int c, size_t n)
 {
@@ -59,8 +59,8 @@ void	ft_strlcpy(char *dst, char *src, size_t dstsize)
 
 char	*ft_strdup(char *str)
 {
-	char	    *p;
-	size_t		len;
+	char	*p;
+	int		len;
 
 	len = ft_strlen(str);
 	p = (char *)malloc(sizeof(char) * len + 1);
@@ -105,7 +105,7 @@ char    *cut_str(char *s)
         ++i;
     if (s[i] == '\n')
         ++i;
-    buff = malloc((size_t)i + 1);
+    buff = malloc(i + 1);
     if (!buff)
         return (NULL);
     i = 0;
