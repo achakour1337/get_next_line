@@ -6,7 +6,7 @@
 /*   By: harrypotter <harrypotter@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 11:42:47 by achakour          #+#    #+#             */
-/*   Updated: 2024/01/15 11:23:10 by harrypotter      ###   ########.fr       */
+/*   Updated: 2024/01/15 13:32:09 by harrypotter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char	*cut_str(char *s)
 	if (s[i] == '\n')
 		buff[i++] = '\n';
 	buff[i] = '\0';
-	// free (s);
 	return (buff);
 }
 
@@ -88,17 +87,17 @@ char	*get_next_line(int fd)
 		return (free (buff[fd]), NULL);
 	swap = buff[fd];
 	buff[fd] = process_str(buff[fd], &tmp);
-	return (free(swap), tmp);
+	return (free(swap), tmp);//harry potter in the header
 }
 
-// #include <stdio.h>
-// int main()
-// {
-// 	int fd = open("test.txt", O_RDONLY);
-// 	char	*buff;
-// 	while ((buff = get_next_line(fd)))
-// 	{
-// 		printf ("%s", buff);
-// 		free (buff);
-// 	}
-// }
+#include <stdio.h>
+int main()
+{
+	int fd = open("test.txt", O_RDONLY);
+	char	*buff;
+	while ((buff = get_next_line(fd)))
+	{
+		printf ("%s", buff);
+		free (buff);
+	}
+}

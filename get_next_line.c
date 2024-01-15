@@ -6,7 +6,7 @@
 /*   By: harrypotter <harrypotter@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 15:19:44 by achakour          #+#    #+#             */
-/*   Updated: 2024/01/15 11:21:15 by harrypotter      ###   ########.fr       */
+/*   Updated: 2024/01/15 13:36:10 by harrypotter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ char	*ft_strchr(char *s, char c)
 	return (NULL);
 }
 
+char	*process_str(char	*buff, char	**tmp)
+{
+	*tmp = cut_str(buff);
+	return (ft_strdup(buff + ft_strlen(*tmp)));
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*buff;
@@ -77,22 +83,21 @@ char	*get_next_line(int fd)
 		buff = ft_strjoin(buff, tmp);
 	}
 	free(tmp);
-	tmp = cut_str(buff);
 	if (!buff || !buff[0])
-		return (free (buff), tmp);
+		return (free (buff), NULL);
 	swap = buff;
-	buff = ft_strdup(buff + ft_strlen(tmp));
+	buff = process_str(buff, &tmp);
 	return (free(swap), tmp);
 }
 
-// #include <stdio.h>
-// int main()
-// {
-// 	int fd = open("test.txt", O_RDONLY);
-// 	char	*buff;
-// 	while ((buff = get_next_line(fd)))
-// 	{
-// 		printf ("%s", buff);
-// 		free (buff);
-// 	}
-// }
+#include <stdio.h>
+int main()
+{
+	int fd = open("test.html", O_RDONLY);
+	char	*buff;
+	while ((buff = get_next_line(fd)))
+	{
+		printf ("%s", buff);
+		free (buff);
+	}
+}
