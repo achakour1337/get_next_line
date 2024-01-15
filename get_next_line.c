@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: harrypotter <harrypotter@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 15:19:44 by achakour          #+#    #+#             */
-/*   Updated: 2023/12/20 19:09:47 by achakour         ###   ########.fr       */
+/*   Updated: 2024/01/15 11:21:15 by harrypotter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*cut_str(char *s)
 	size_t	i;
 
 	i = 0;
-	if (!s)
+	if (!s || !s[i])
 		return (NULL);
 	while (s[i] && s[i] != '\n')
 		++i;
@@ -63,24 +63,36 @@ char	*get_next_line(int fd)
 	char		*swap;
 	ssize_t		count;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	tmp = malloc((size_t)BUFFER_SIZE + 1);
 	if (!tmp)
 		return (NULL);
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (free(tmp), NULL);
 	while (!ft_strchr(buff, '\n'))
 	{
 		count = read(fd, tmp, BUFFER_SIZE);
-		if (count == 0)
+		if (count == 0 || count == -1)
 			break ;
-		if (count == -1)
-			return (free(tmp), NULL);
 		tmp[count] = '\0';
 		buff = ft_strjoin(buff, tmp);
 	}
 	free(tmp);
 	tmp = cut_str(buff);
+	if (!buff || !buff[0])
+		return (free (buff), tmp);
 	swap = buff;
 	buff = ft_strdup(buff + ft_strlen(tmp));
 	return (free(swap), tmp);
 }
+
+// #include <stdio.h>
+// int main()
+// {
+// 	int fd = open("test.txt", O_RDONLY);
+// 	char	*buff;
+// 	while ((buff = get_next_line(fd)))
+// 	{
+// 		printf ("%s", buff);
+// 		free (buff);
+// 	}
+// }

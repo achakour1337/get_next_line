@@ -6,26 +6,11 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 09:10:35 by achakour          #+#    #+#             */
-/*   Updated: 2023/12/19 12:34:28 by achakour         ###   ########.fr       */
+/*   Updated: 2024/01/13 14:58:33 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-void	*ft_memset(void *s, int c, size_t n)
-{
-	unsigned char	*p;
-	size_t			i;
-
-	i = 0;
-	p = s;
-	while (i < n)
-	{
-		p[i] = (unsigned char)c;
-		++i;
-	}
-	return ((void *)p);
-}
 
 size_t	ft_strlen(const char *s)
 {

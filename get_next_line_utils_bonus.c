@@ -6,26 +6,11 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 11:52:30 by achakour          #+#    #+#             */
-/*   Updated: 2023/12/19 12:33:36 by achakour         ###   ########.fr       */
+/*   Updated: 2024/01/13 14:57:53 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-
-void	*ft_memset(void *s, int c, size_t n)
-{
-	unsigned char	*p;
-	size_t			i;
-
-	i = 0;
-	p = s;
-	while (i < n)
-	{
-		p[i] = (unsigned char)c;
-		++i;
-	}
-	return ((void *)p);
-}
 
 size_t	ft_strlen(const char *s)
 {
@@ -62,7 +47,7 @@ void	ft_strlcpy(char *dst, char *src, size_t dstsize)
 char	*ft_strdup(char *str)
 {
 	char	*p;
-	size_t	len;
+	int		len;
 
 	if (!str)
 		return (NULL);
